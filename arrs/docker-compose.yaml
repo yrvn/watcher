@@ -1,0 +1,71 @@
+services:
+  sonarr:
+    container_name: sonarr
+    image: ghcr.io/hotio/sonarr
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Montevideo
+    ports:
+      - '8989:8989'
+    volumes:
+      - /home/${USER}/server/configs/sonarr:/config
+      - /media/TwoTOne/data:/dataOne
+      - /media/TwoTTwo/data:/dataTwo
+      - /etc/localtime:/etc/localtime:ro
+      - /media/FourTOne/data:/dataFour
+  radarr:
+    container_name: radarr
+    image: ghcr.io/hotio/radarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Montevideo
+    ports:
+      - '7878:7878'
+    volumes:
+      - /home/${USER}/server/configs/radarr:/config
+      - /media/TwoTOne/data:/dataOne
+      - /media/TwoTTwo/data:/dataTwo
+      - /etc/localtime:/etc/localtime:ro
+      - /media/FourTOne/data:/dataFour
+  bazarr:
+    container_name: bazarr
+    image: ghcr.io/hotio/bazarr:latest
+    restart: unless-stopped
+    logging:
+      driver: json-file
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Montevideo
+    ports:
+      - '6767:6767'
+    volumes:
+      - /home/${USER}/server/configs/bazarr:/config
+      - /media/TwoTOne/data/Media:/dataOne/Media
+      - /media/TwoTTwo/data/Media:/dataTwo/Media
+      - /etc/localtime:/etc/localtime:ro
+      - /media/FourTOne/data:/dataFour
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Montevideo
+    volumes:
+      - /home/${USER}/server/configs/lidarr:/config
+      - /media/TwoTOne/data:/dataOne
+      - /media/TwoTTwo/data:/dataTwo
+      - /media/OneTOne/data:/dataThree
+      - /media/FourTOne/data:/dataFour
+    ports:
+      - 8686:8686
+    restart: unless-stopped

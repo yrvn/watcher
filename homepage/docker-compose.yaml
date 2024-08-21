@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  homepage:
+    image: ghcr.io/benphelps/homepage:latest
+    container_name: homepage
+    ports:
+      - 3001:3001
+    volumes:
+      - /home/${USER}/server/configs/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /media/OneTOne:/OneTOne
+      - /media/TwoTOne:/TwoTOne
+      - /media/TwoTTwo:/TwoTTwo
+    environment:
+      PUID: 1000
+      PGID: 1000
+

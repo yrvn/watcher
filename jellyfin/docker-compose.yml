@@ -1,0 +1,14 @@
+jellyfin:
+    container_name: jellyfin
+    image: ghcr.io/linuxserver/jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Montevideo
+    ports:
+      - '8096:8096'
+    volumes:
+      - '/home/${USER}/server/configs/jellyfin:/config'
+      - /media/TwoTOne/data/Media:/dataOne/media
+      - /media/TwoTTwo/data/Media:/dataTwo/media
+    restart: unless-stopped

@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  gotify:
+    image: gotify/server
+    ports:
+      - 8088:80
+    environment:
+      - GOTIFY_DEFAULTUSER_PASS=
+      - TZ=America/Montevideo
+    volumes:
+      - "/home/${USER}/server/configs/gotify/data:/app/data"
